@@ -1,6 +1,7 @@
 using FrogDate.API.Data;
 using FrogDate.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrogDate.API.Controllers;
 
@@ -15,39 +16,40 @@ public class ValuesController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetValues()
+    public async Task<IActionResult> GetValues()
     {
-        var values = _context.Values.ToList();
+        var values =await _context.Values.ToListAsync();
         return Ok(values);
     }
     [HttpGet("{id}")]
-    public IActionResult GetValue(int id)
+    public async Task<IActionResult> GetValue(int id)
     {
-        var value=_context.Values.FirstOrDefault(x=>x.Id==id);
+        var value=await _context.Values.FirstOrDefaultAsync(x=>x.Id==id);
         return Ok(value);
     }
     [HttpPost]
-    public IActionResult AddValue([FromBody] Value value)
+    public async Task<IActionResult> AddValue([FromBody] Value value)
     {
         _context.Values.Add(value);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return Ok(value);
     }
     [HttpPut("{id}")]
-    public IActionResult EditValues(int id,[FromBody] Value value)
+    public async Task<IActionResult> EditValues(int id,[FromBody] Value value)
     {
-         var data=_context.Values.Find(id);
+         var data= await _context.Values.FindAsync(id);
+         if (data==null) return NoContent();
          data.Name=value.Name;
-         _context.Values.Update(data);
-         _context.SaveChanges();
+        _context.Values.Update(data);
+        await _context.SaveChangesAsync();
          return Ok(data);
     }
     [HttpDelete("{id}")]
-    public IActionResult DeleteValue(int id)
+    public async Task<IActionResult> DeleteValue(int id)
     {
-        var data=_context.Values.Find(id);
+        var data=await _context.Values.FindAsync(id);
         _context.Values.Remove(data);
-        _context.SaveChanges();
+         await _context.SaveChangesAsync();
         return Ok(data);
     }
 }
