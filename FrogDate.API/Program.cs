@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //According to warhammer.API in this place we put dbcontext, using builder.services.addbcontex<T>
-builder.Services.AddDbContext<DataContext>(x=>x.UseSqlite("Conectionstring"));
+builder.Services.AddDbContext<DataContext>(x=>x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
