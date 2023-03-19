@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FrogDate.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrogDate.API.Data
 {
@@ -16,16 +17,19 @@ namespace FrogDate.API.Data
         {
             _context = context;
         }
-        public Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
-            throw new NotImplementedException();
+            var user= await _context.Users.FirstOrDefaultAsync(x=>x.Username==username);
+            if (user==null) return null;
+            if(!VerifyPasswordHash(password,user.PasswordHash,user.PasswordSalt)) return null;
+            return user;
         }
 
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHashSalt(password, out passwordHash,out passwordSalt);
-            
+
             user.PasswordHash=passwordHash;
             user.PasswordSalt=passwordSalt;
 
@@ -33,11 +37,13 @@ namespace FrogDate.API.Data
             await _context.SaveChangesAsync();
             return user;
         }
-        public Task<bool> UserExist(string username)
+        public async Task<bool> UserExist(string username)
         {
-            throw new NotImplementedException();
+            if(await _context.Users.AnyAsync(x=>x.Username==username)) return true;
+            return false;
         }
 #endregion
+#region method private
 
         private void CreatePasswordHashSalt(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -46,7 +52,20 @@ namespace FrogDate.API.Data
                 passwordSalt=hmac.Key;
                 passwordHash=hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
-        }      
+        }
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using(var hmac=new System.Security.Cryptography.HMACSHA512())
+            {
+                var computedHash =hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                for (int i=0;i<computedHash.Length;i++)
+                {
+                    if(computedHash[i]!=passwordHash[i]) return false;
+                }
+                return true;
+            }
+        }
+#endregion      
     }
 
  }
