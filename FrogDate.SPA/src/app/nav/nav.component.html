@@ -16,9 +16,9 @@
           <a class="nav-link disabled">Messages</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="username" aria-label="username">
-        <input class="form-control me-2" type="search" placeholder="password" aria-label="password">
+      <form #loginForm="ngForm" class="d-flex" role="search" (ngSubmit)="login()">
+        <input class="form-control me-2" type="search" placeholder="username" [(ngModel)]="model.username" name="username" required>
+        <input class="form-control me-2" type="search" placeholder="password" [(ngModel)]="model.password" name="password" required>
         <button class="btn btn-outline-success" type="submit">login</button>
       </form>
     </div>
