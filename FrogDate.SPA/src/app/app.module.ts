@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 
+import { RegisterComponent } from './register/register/register.component';
+import { HomeComponent } from './home/home/home.component';
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
 import { NavComponent } from './nav/nav.component';
@@ -12,7 +14,9 @@ import { AuthService } from './_services/auth.service';
   declarations: [		
     AppComponent,
       ValueComponent,
-      NavComponent
+      NavComponent,
+      HomeComponent,
+      RegisterComponent
    ],
   imports: [
     BrowserModule,
