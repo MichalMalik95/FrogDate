@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   @Input() valuesFromHome:any;
+  @Output() cancelRegister=new EventEmitter();
   model:any={};
 
   constructor() { }
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.model);
   }
   cancel(){
+    this.cancelRegister.emit(false);
     console.log("Canceled")
   }
 }
