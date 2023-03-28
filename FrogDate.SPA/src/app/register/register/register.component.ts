@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,18 +10,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  @Input() valuesFromHome:any;
   @Output() cancelRegister=new EventEmitter();
   model:any={};
 
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit() {
   }
 
   register(){
-    console.log(this.model);
-  }
+    this.authService.register(this.model).subscribe(()=>{console.log("Register completed");},error=>(console.log(error)))
+  };
   cancel(){
     this.cancelRegister.emit(false);
     console.log("Canceled")
