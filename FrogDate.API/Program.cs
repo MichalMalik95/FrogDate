@@ -15,8 +15,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //According to warhammer.API in this place we put dbcontext, using builder.services.addbcontex<T>
 builder.Services.AddDbContext<DataContext>(x=>x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-//builder.Services.AddCors();
+builder.Services.AddCors();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddTransient<Seed>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
 {options.TokenValidationParameters=new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
@@ -46,3 +47,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
