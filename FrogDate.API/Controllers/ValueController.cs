@@ -11,27 +11,12 @@ namespace FrogDate.API.Controllers;
 public class ValuesController : ControllerBase
 {
     private readonly DataContext _context;
-    private readonly Seed _seed;
-
-    public ValuesController(DataContext context, Seed seed)
+    public ValuesController(DataContext context)
     {
         _context=context;
-        _seed=seed;
     }
     [AllowAnonymous]
-    [HttpGet("Seed")]
-     public async Task<IActionResult> SeedValues()
-    {
-        try
-        {
-            _seed.SeedUsers();
-        }
-        catch(Exception ex)
-        {
-            throw;
-        }
-        return Ok();
-    }
+    [HttpGet]
     public async Task<IActionResult> GetValues()
     {
         var values =await _context.Values.ToListAsync();

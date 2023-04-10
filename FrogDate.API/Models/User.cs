@@ -28,7 +28,7 @@ namespace FrogDate.API.Models
      public string MartialStatus { get; set; }
      public string Education { get; set; }
      public string Profession { get; set; }
-     public string? Children { get; set; }
+     public string Children { get; set; }
      public string Languages { get; set; }
      public string Motto { get; set; }
      public string Description { get; set; }
