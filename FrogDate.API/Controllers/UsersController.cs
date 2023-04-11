@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrogDate.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
 
@@ -22,8 +22,16 @@ namespace FrogDate.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
+            try
+            {
             var users= await _repo.GetUsers();
-            return Ok(users);
+            return Ok(users);   
+            }
+            catch(Exception e)
+            {
+            var x=e;
+            }
+            return BadRequest();
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
