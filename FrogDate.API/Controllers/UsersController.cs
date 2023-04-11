@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FrogDate.API.Data;
+using FrogDate.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +17,10 @@ namespace FrogDate.API.Controllers
     public class UsersController:ControllerBase
     {
         private readonly IUserRepository _repo;
-        public UsersController(IUserRepository repo)
+        private readonly IMapper _mapper;
+        public UsersController(IUserRepository repo, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
         }
         [HttpGet]
@@ -25,7 +29,8 @@ namespace FrogDate.API.Controllers
             try
             {
             var users= await _repo.GetUsers();
-            return Ok(users);   
+            var usersToReturn= _mapper.Map<IEnumerable<UserForListDto>>(users);
+            return Ok(usersToReturn);   
             }
             catch(Exception e)
             {
@@ -36,9 +41,17 @@ namespace FrogDate.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user=await _repo.GetUser(id);
-            return Ok(user);
-
+            try
+            {
+                var user=await _repo.GetUser(id);
+                var userToReturn = _mapper.Map<UserForDetailedDto>(user);
+                return Ok(userToReturn);
+            }
+            catch(Exception e)
+            {
+                var x=e;
+            }
+            return BadRequest();
         }
     }
 }

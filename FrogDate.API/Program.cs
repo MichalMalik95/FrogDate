@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
-
+using AutoMapper;
 
 internal class Program
 {
@@ -25,6 +25,7 @@ internal class Program
         builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddMvc().AddNewtonsoftJson
         (opt=>opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+        builder.Services.AddAutoMapper();
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IGenericRepository, GenericRepository>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
