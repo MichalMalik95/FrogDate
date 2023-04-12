@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
+import { UserService } from './_services/user.service';
 
 @NgModule({
   declarations: [		
@@ -23,7 +24,7 @@ import { AlertifyService } from './_services/alertify.service';
     FormsModule
     
   ],
-  providers: [AuthService, AlertifyService],
+  providers: [AuthService, AlertifyService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
