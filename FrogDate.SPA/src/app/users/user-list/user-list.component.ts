@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class UserListComponent implements OnInit {
 
-  users:User[] | undefined;
+  users:User[]=[];
 
   constructor(private userService: UserService, private alertify:AlertifyService) { }
 

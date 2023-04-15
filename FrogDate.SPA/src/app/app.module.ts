@@ -11,20 +11,26 @@ import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { LikesComponent } from './likes/likes.component';
+import { MessagesComponent } from './messages/messages.component';
+import { appRoutes } from './routes';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [		
+  declarations: [					
     AppComponent,
       NavComponent,
       HomeComponent,
       RegisterComponent,
-      UserListComponent
+      UserListComponent,
+      LikesComponent,
+      MessagesComponent
    ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
-    
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthService, AlertifyService,UserService],
   bootstrap: [AppComponent]
