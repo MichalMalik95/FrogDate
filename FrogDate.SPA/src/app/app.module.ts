@@ -15,6 +15,7 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [					
@@ -32,7 +33,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, AlertifyService,UserService],
+  providers: [AuthService, AlertifyService,UserService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
