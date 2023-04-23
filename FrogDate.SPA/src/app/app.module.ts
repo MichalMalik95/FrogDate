@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { UserCardComponent } from './users/user-list/user-card/user-card.component';
 
 @NgModule({
   declarations: [					
@@ -27,7 +28,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
       RegisterComponent,
       UserListComponent,
       LikesComponent,
-      MessagesComponent
+      MessagesComponent,
+      UserCardComponent
    ],
   imports: [
     BrowserModule,

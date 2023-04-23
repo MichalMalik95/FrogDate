@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true }}]
 })
 export class NavComponent implements OnInit {
 
@@ -17,9 +20,9 @@ export class NavComponent implements OnInit {
   }
   login() {
     this.authService.login(this.model).subscribe(next => {
-      this.alertify.success("Pomyślnie zalogowałeś się na konto");
+      this.alertify.success("Logged in");
     },
-      error => { this.alertify.error("Błąd logowania"); },
+      error => { this.alertify.error("Loggin error"); },
       ()=>{this.router.navigate(['/users'])}
     )
   };
@@ -28,7 +31,7 @@ export class NavComponent implements OnInit {
   };
   loggedOut(){
     localStorage.removeItem('token');
-    this.alertify.message("Wylogowano~!");
+    this.alertify.message("Logged out~!");
     this.router.navigate(['/home']);
   };
 

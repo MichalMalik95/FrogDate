@@ -26,17 +26,16 @@ namespace FrogDate.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            try
-            {
+            try{
             var users= await _repo.GetUsers();
             var usersToReturn= _mapper.Map<IEnumerable<UserForListDto>>(users);
-            return Ok(usersToReturn);   
+            return Ok(usersToReturn);
             }
-            catch(Exception e)
-            {
-            var x=e;
+            catch(Exception e){
+                var x=e;
             }
             return BadRequest();
+        
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)

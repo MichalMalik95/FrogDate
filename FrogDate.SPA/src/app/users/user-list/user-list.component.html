@@ -1,6 +1,18 @@
-<div>
-  <p *ngFor="let user of users">
-    {{user.id}} - {{user.username}} - {{user.zodiacSign}}
-  </p>
+<div class="d-flex p-2 bd-highlight">
+  <div class="p-2 bd-highlight">REKLAMA_RAKLAMA_REKLAMA_REKLAMA</div>
 </div>
 
+<div class="d-flex p-2 bd-highlight">
+  <div class="p-2 w-100 bd-highlight"></div>
+  <div class="p-2 flex-shrink-1 bd-highlight">
+    REKLAMA_REKLAMA REKLAMA_REKLAMA REKLAMA_REKLAMA REKLAMA_REKLAMA
+    REKLAMA_REKLAMA REKLAMA_REKLAMA REKLAMA_REKLAMA REKLAMA_REKLAMA
+  </div>
+  <div class="p-2 bd-highlight">
+    <div class="d-flex flex-wrap">
+      <div *ngFor="let user of users" class="p-2 bd-highlight">
+        <app-user-card [user]="user"></app-user-card>
+      </div>
+    </div>
+  </div>
+</div>
