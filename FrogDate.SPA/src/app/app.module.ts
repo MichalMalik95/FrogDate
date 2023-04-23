@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserCardComponent } from './users/user-list/user-card/user-card.component';
+import { UserDetailComponent } from './users/user-list/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [					
@@ -29,7 +30,8 @@ import { UserCardComponent } from './users/user-list/user-card/user-card.compone
       UserListComponent,
       LikesComponent,
       MessagesComponent,
-      UserCardComponent
+      UserCardComponent,
+      UserDetailComponent
    ],
   imports: [
     BrowserModule,
