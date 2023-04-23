@@ -1,3 +1,38 @@
 .card{
     margin: 5%;
 }
+.card img{
+    transform: scale(1.0,1.0);
+    transition-duration: 400ms;
+    transition-timing-function: ease-in-out;
+
+}
+.card:hover img{
+    transform: scale(1.02,1.02);
+    transition-duration: 800ms;
+    transition-timing-function: ease-in-out;
+    opacity: 0.6;
+
+}
+.card-img-top{
+    overflow: hidden;
+    position: relative;
+
+}
+.user-icons{
+    position: absolute;
+    bottom: 18%;
+    left: 0;
+    right: 0;
+    opacity: 0.1;
+} 
+.user-icons:hover{
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    opacity: 0.9;
+} 
+.animate{
+    transition: all 0.4s ease-in-out;
+}
