@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserCardComponent } from './users/user-list/user-card/user-card.component';
 import { UserDetailComponent } from './users/user-list/user-detail/user-detail.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [					
@@ -39,7 +40,9 @@ import { UserDetailComponent } from './users/user-list/user-detail/user-detail.c
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot()
+
   ],
   providers: [AuthService, AlertifyService,UserService,AuthGuard],
   bootstrap: [AppComponent]
