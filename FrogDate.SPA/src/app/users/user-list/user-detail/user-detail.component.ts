@@ -19,8 +19,8 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data=>{
-      this.user=data['user'];
+    this.route.data.subscribe((data: any)=>{
+      this.user=data.user;
     });
   }
 }

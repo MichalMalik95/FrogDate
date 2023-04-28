@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-nav',
@@ -22,7 +23,8 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model).subscribe(next => {
       this.alertify.success("Logged in");
     },
-      error => { this.alertify.error("Loggin error"); },
+      (error:HttpErrorResponse) => { 
+        this.alertify.error(error.error); },
       ()=>{this.router.navigate(['/users'])}
     )
   };
@@ -35,5 +37,5 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/home']);
   };
 
-}import { Router } from '@angular/router';
+}
 

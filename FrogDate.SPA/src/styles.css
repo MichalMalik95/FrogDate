@@ -2,3 +2,14 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
 @import '../node_modules/alertifyjs/build/css/alertify.min.css'; 
 @import '../node_modules/bootswatch/dist/cerulean/bootstrap.min.css';
+
+.tab-panel{
+    border:1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}
+.user-tabset{
+    border:0;
+    background: none !important;
+    color: #333333;
+}

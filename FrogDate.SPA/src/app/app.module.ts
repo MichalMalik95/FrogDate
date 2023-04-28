@@ -21,6 +21,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserCardComponent } from './users/user-list/user-card/user-card.component';
 import { UserDetailComponent } from './users/user-list/user-detail/user-detail.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 @NgModule({
   declarations: [					
@@ -44,7 +46,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     TabsModule.forRoot()
 
   ],
-  providers: [AuthService, AlertifyService,UserService,AuthGuard],
+  providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

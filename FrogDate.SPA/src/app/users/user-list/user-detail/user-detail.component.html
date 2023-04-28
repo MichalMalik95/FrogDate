@@ -5,23 +5,23 @@
       <div class="card-body">
         <div>
           <strong>Name</strong>
-          <p>{{user?.username}}</p>
+          <p>{{user.username}}</p>
         </div>
         <div>
           <strong>Gender</strong>
-          <p>{{user?.gender}}</p>
+          <p>{{user.gender}}</p>
         </div>
         <div>
           <strong>Age</strong>
-          <p>{{user?.age}}</p>
+          <p>{{user.age}}</p>
         </div>
         <div>
           <strong>Zodiac Sign</strong>
-          <p>{{user?.zodiacSign}}</p>
+          <p>{{user.zodiacSign}}</p>
         </div>
         <div>
           <strong>City</strong>
-          <p>{{user?.city}}</p>
+          <p>{{user.city}}</p>
         </div>
       </div>
       <div class="card-fotter">
@@ -31,94 +31,100 @@
     </div>
   </div>
   <div class="p-2 flex-grow-1 bd-highlight">
-    <div>
-      <tabset>
+    <div class="tab-panel">
+      <tabset class="user-tabset">
         <tab heading="About me" id="tab1">
           <div>
             <strong>Description</strong>
-            <p>{{user?.description}}</p>
+            <p>{{user.description}}</p>
           </div>
           <div>
             <strong>Looking for</strong>
-            <p>{{user?.lookingFor}}</p>
+            <p>{{user.lookingFor}}</p>
           </div>
           <div>
             <strong>Motto</strong>
-            <p>{{user?.motto}}</p>
+            <p>{{user.motto}}</p>
           </div>
           <div>
             <strong>What friends tell about me</strong>
-            <p>{{user?.friendsDescribeMe}}</p>
+            <p>{{user.friendsDescribeMe}}</p>
           </div>
         </tab>
         <tab heading="Interests and hobby">
           <div>
             <strong>Interests</strong>
-            <p>{{user?.intrests}}</p>
+            <p>{{user.intrests}}</p>
           </div>
           <div>
             <strong>Free-time activities</strong>
-            <p>{{user?.freeTime}}</p>
+            <p>{{user.freeTime}}</p>
           </div>
           <div>
             <strong>Best films</strong>
-            <p>{{user?.films}}</p>
+            <p>{{user.films}}</p>
           </div>
           <div>
             <strong>Sports</strong>
-            <p>{{user?.sports}}</p>
+            <p>{{user.sports}}</p>
           </div>
           <div>
             <strong>Music</strong>
-            <p>{{user?.music}}</p>
+            <p>{{user.music}}</p>
           </div>   
         </tab>
         <tab heading="Visual information">
           <div>
             <strong>Growth</strong>
-            <p>{{user?.growth}}</p>
+            <p>{{user.growth}}</p>
           </div> 
           <div>
             <strong>Eye colour</strong>
-            <p>{{user?.eyeColour}}</p>
+            <p>{{user.eyeColour}}</p>
           </div> 
           <div>
             <strong>Skin colour</strong>
-            <p>{{user?.skinColour}}</p>
+            <p>{{user.skinColour}}</p>
           </div> 
           <div>
             <strong>Martial status</strong>
-            <p>{{user?.martialStatus}}</p>
+            <p>{{user.martialStatus}}</p>
           </div> 
         </tab>
 
         <tab heading="My steps of life">
           <div>
             <strong>Education</strong>
-            <p>{{user?.education}}</p>
+            <p>{{user.education}}</p>
           </div> 
           <div>
             <strong>Profession</strong>
-            <p>{{user?.profession}}</p>
+            <p>{{user.profession}}</p>
           </div> 
           <div>
             <strong>Children</strong>
-            <p>{{user?.children}}</p>
+            <p>{{user.children}}</p>
           </div> 
           <div>
             <strong>Languages</strong>
-            <p>{{user?.languages}}</p>
+            <p>{{user.languages}}</p>
           </div> 
         </tab>
         <tab heading="Activity on site">
           <div>
             <strong>Last activity</strong>
-            <p>{{user?.lastActive}}</p>
+            <p>{{user.lastActive}}</p>
           </div> 
           <div>
             <strong>Created</strong>
-            <p>{{user?.created}}</p>
+            <p>{{user.created}}</p>
           </div>  
+        </tab>
+        <tab heading="Picture gallery">
+          <div>
+            <strong></strong>
+            <p>{{user.lastActive}}</p>
+          </div> 
         </tab>
       </tabset>
     </div>

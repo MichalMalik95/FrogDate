@@ -19,9 +19,11 @@ constructor(private http:HttpClient) { }
 login(model:any): Observable<any> {
   return this.http.post(this.baseUrl + '/login', model).pipe(map((response:any)=>{
     const user = response;
-    if(user) localStorage.setItem('token',user.token)
-    this.decodedToken=this.jwthelper.decodeToken(user.token);
-    console.log(this.decodedToken);
+    if(user) {
+      localStorage.setItem('token',user.token);
+      this.decodedToken=this.jwthelper.decodeToken(user.token);
+      console.log(this.decodedToken);
+  }
   } ));
 }
 register(model:any){
