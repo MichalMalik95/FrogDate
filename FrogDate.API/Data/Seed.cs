@@ -32,6 +32,7 @@ namespace FrogDate.API.Data
                 user.PasswordHash=passwordHash;
                 user.PasswordSalt=passwordSalt;
                 user.Username=user.Username.ToLower();
+                user.Children="";
 
                 _context.Users.Add(user);
 

@@ -11,8 +11,11 @@ namespace FrogDate.API.Controllers;
 public class ValuesController : ControllerBase
 {
     private readonly DataContext _context;
-    public ValuesController(DataContext context)
+
+    private readonly Seed _seed;
+    public ValuesController(DataContext context, Seed seed)
     {
+        _seed=seed;
         _context=context;
     }
     [AllowAnonymous]
@@ -29,12 +32,14 @@ public class ValuesController : ControllerBase
         var value=await _context.Values.FirstOrDefaultAsync(x=>x.Id==id);
         return Ok(value);
     }
-    [HttpPost]
-    public async Task<IActionResult> AddValue([FromBody] Value value)
+    [AllowAnonymous]
+    [HttpGet("addValue")]
+    public async Task<IActionResult> AddValues()
     {
-        _context.Values.Add(value);
-        await _context.SaveChangesAsync();
-        return Ok(value);
+        _seed.SeedUsers();
+        //_context.Values.Add(value);
+        //await _context.SaveChangesAsync();
+        return Ok();
     }
     [HttpPut("{id}")]
     public async Task<IActionResult> EditValues(int id,[FromBody] Value value)
