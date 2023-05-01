@@ -1,3 +1,4 @@
+<h1>{{user.username}} PROFILE</h1>
 <div class="d-flex p-2 bd-highlight">
   <div class="p-2 bd-highlight pictureslot">
     <div class="card">
@@ -122,8 +123,7 @@
         </tab>
         <tab heading="Picture gallery">
           <div>
-            <strong></strong>
-            <p>{{user.lastActive}}</p>
+            <gallery [items]="images"></gallery>
           </div> 
         </tab>
       </tabset>

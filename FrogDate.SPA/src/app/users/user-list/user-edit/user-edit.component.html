@@ -1,0 +1,215 @@
+<div class="col sm-4">
+  <h1>Profile edition</h1>
+</div>
+<div class="col sm-8">
+  <div class="alert alert-info" *ngIf="editPart.dirty" >
+    <strong>Info:</strong>You changes data. Any unsaved change will be lost!
+  </div>
+</div>
+
+<div class="d-flex p-2 bd-highlight">
+  <div class="p-2 bd-highlight pictureslot">
+    <div class="card">
+      <img class="card-img-top img-thumbnail" src="{{ user.photoUrl }}" />
+      <div class="card-body">
+        <div>
+          <strong>Name</strong>
+          <p>{{ user.username }}</p>
+        </div>
+        <div>
+          <strong>Gender</strong>
+          <p>{{ user.gender }}</p>
+        </div>
+        <div>
+          <strong>Age</strong>
+          <p>{{ user.age }}</p>
+        </div>
+        <div>
+          <strong>Zodiac Sign</strong>
+          <p>{{ user.zodiacSign }}</p>
+        </div>
+        <div>
+          <strong>City</strong>
+          <p>{{ user.city }}</p>
+        </div>
+      </div>
+      <div class="card-fotter">
+        <button class="btn btn-success btn-block">Save changes</button>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 flex-grow-1 bd-highlight" id="editPart" >
+    <tabset class="user-tabset">
+      <tab heading="About me" id="tab1">
+        <div>
+          <strong>Description</strong>
+          <textarea
+            class="form-control"
+            rows="2"
+            [(ngModel)]="user.description"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Looking for</strong>
+          <textarea
+            class="form-control"
+            rows="2"
+            [(ngModel)]="user.lookingFor"
+          ></textarea>
+        </div>
+
+        <div>
+          <strong>Motto</strong>
+          <textarea
+            class="form-control"
+            rows="2"
+            [(ngModel)]="user.motto"
+          ></textarea>
+        </div>
+        <div>
+          <strong>What friends tell about me</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.friendsDescribeMe"
+          ></textarea>
+        </div>
+      </tab>
+      <tab heading="Interests and hobby">
+        <div>
+          <strong>Interests</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.intrests"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Free-time activities</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.freeTime"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Best films</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.films"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Sports</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.sports"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Music</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.music"
+          ></textarea>
+        </div>
+      </tab>
+      <tab heading="Visual information">
+        <div>
+          <strong>Growth</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.growth"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Eye colour</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.eyeColour"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Skin colour</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.skinColour"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Martial status</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.martialStatus"
+          ></textarea>
+        </div>
+      </tab>
+
+      <tab heading="My steps of life">
+        <div>
+          <strong>Education</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.education"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Profession</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.profession"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Children</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.children"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Languages</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.languages"
+          ></textarea>
+        </div>
+      </tab>
+      <tab heading="Activity on site">
+        <div>
+          <strong>Last activity</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.lastActive"
+          ></textarea>
+        </div>
+        <div>
+          <strong>Created</strong>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="user.created"
+          ></textarea>
+        </div>
+      </tab>
+      <tab heading="Picture gallery">
+        <div>
+          <!-- <gallery [items]="images"></gallery> -->
+        </div>
+      </tab>
+    </tabset>
+    <div class="tab-panel"></div>
+  </div>
+</div>

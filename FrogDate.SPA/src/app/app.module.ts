@@ -23,9 +23,13 @@ import { UserDetailComponent } from './users/user-list/user-detail/user-detail.c
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { GalleryModule } from 'ng-gallery';
+import { UserEditComponent } from './users/user-list/user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
+
 
 @NgModule({
-  declarations: [					
+  declarations: [
     AppComponent,
       NavComponent,
       HomeComponent,
@@ -34,7 +38,9 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
       LikesComponent,
       MessagesComponent,
       UserCardComponent,
-      UserDetailComponent
+      UserDetailComponent,
+      UserEditComponent
+
    ],
   imports: [
     BrowserModule,
@@ -43,10 +49,12 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    GalleryModule,
+    GalleryModule.withConfig({  })
 
   ],
-  providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver],
+  providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver,UserEditResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
