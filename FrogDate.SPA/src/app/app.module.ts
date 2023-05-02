@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register/register.component';
 import { HomeComponent } from './home/home/home.component';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
@@ -51,7 +51,8 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     GalleryModule,
-    GalleryModule.withConfig({  })
+    GalleryModule.withConfig({  }),
+    ReactiveFormsModule
 
   ],
   providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver,UserEditResolver],
