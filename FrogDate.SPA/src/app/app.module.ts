@@ -26,6 +26,7 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { GalleryModule } from 'ng-gallery';
 import { UserEditComponent } from './users/user-list/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
     ReactiveFormsModule
 
   ],
-  providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver,UserEditResolver],
+  providers: [AuthService, AlertifyService,UserService,AuthGuard,UserDetailResolver,UserListResolver,
+    UserEditResolver,PreventUnsavedChanges],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
