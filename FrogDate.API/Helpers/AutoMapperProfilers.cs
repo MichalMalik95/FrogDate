@@ -27,6 +27,7 @@ namespace FrogDate.API.Helpers
                     opt.ResolveUsing(src=>src.DayOfBirth.CalculateAge());
                 });
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<UserForUpdateDto,User>();
         }
     }
 }
