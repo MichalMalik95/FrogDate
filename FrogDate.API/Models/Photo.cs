@@ -8,6 +8,7 @@ namespace FrogDate.API.Models
 
         public DateTime DateAdded {get;set;}
         public bool IsMain { get; set; }
+        public string public_id { get; set; }
         public User User { get; set; }  //kaskadowe usuwanie możliwe dzięki temu powiązaniu
         public int UserId { get; set; }
     }

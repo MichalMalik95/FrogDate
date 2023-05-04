@@ -57,15 +57,18 @@ namespace FrogDate.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            if(id!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            return Unauthorized();
+            var x = User.FindFirst("tympyuju");
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
             var userFromRepo= await _repo.GetUser(id);
+            var result = _mapper.Map(userForUpdateDto,userFromRepo);
 
-            _mapper.Map(userForUpdateDto,userFromRepo);
 
-            if(await _repo.SaveAll())
-            return NoContent();
+            if (await _repo.Update(result))
+            {
+                return NoContent();
+            }
 
             throw new Exception($"Updating user of id:{id} is failed");
 

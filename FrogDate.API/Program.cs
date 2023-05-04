@@ -11,6 +11,8 @@ using AutoMapper;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using FrogDate.API.Helpers;
+using FrogDate.API;
+using System.Configuration;
 
 internal class Program
 {
@@ -28,6 +30,7 @@ internal class Program
         builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddMvc().AddNewtonsoftJson
         (opt=>opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+        builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
         builder.Services.AddAutoMapper();
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IGenericRepository, GenericRepository>();
