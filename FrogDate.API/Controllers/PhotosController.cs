@@ -38,8 +38,7 @@ public class PhotosController :ControllerBase
              _cloudinary=new Cloudinary(account);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
+        [HttpPost]public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -74,7 +73,7 @@ public class PhotosController :ControllerBase
             if(await _repository.SaveAll())
             {
                 var photoToReturn=_mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto",new {id=photo.Id},photoToReturn);
+                return CreatedAtRoute("GetPhoto",new {id=photo.Id},value:photoToReturn);
             }
 
 
