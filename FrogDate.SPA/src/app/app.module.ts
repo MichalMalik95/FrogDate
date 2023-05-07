@@ -28,6 +28,8 @@ import { UserEditComponent } from './users/user-list/user-edit/user-edit.compone
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { PhotosComponent } from './users/photos/photos.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
       MessagesComponent,
       UserCardComponent,
       UserDetailComponent,
-      UserEditComponent
+      UserEditComponent,
+      PhotosComponent
 
    ],
   imports: [
@@ -54,7 +57,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
     TabsModule.forRoot(),
     GalleryModule,
     GalleryModule.withConfig({  }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
 
   ],
   providers: [
