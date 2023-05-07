@@ -16,12 +16,10 @@ export class PhotosComponent implements OnInit {
   photos:Photo[];
   uploader:FileUploader;
   hasBaseDropZoneOver:boolean =false;
-  response:string;
   baseUrl=environment.apiUrl;
+  response:string;
 
   constructor(private authService:AuthService) { }
-
-
 
   ngOnInit() {
     this.initializeUploader();
@@ -33,14 +31,30 @@ export class PhotosComponent implements OnInit {
 
   initializeUploader(){
     this.uploader=new FileUploader({
-      url:this.baseUrl+'users/'+this.authService.decodedToken.nameid+'/photos',
+      url:this.baseUrl+'/users/'+this.authService.decodedToken.nameid+'/photos',
       authToken:'Bearer' + localStorage.getItem('token'),
       isHTML5:true,
       allowedFileType:["image"],
       removeAfterUpload:true,
       autoUpload:false,
       maxFileSize:10*1024*1024
-    });
+    }
+    );
+
+    this.uploader.onAfterAddingFile= (file)=>{file.withCredentials=false};
+    this.uploader.onSuccessItem=(item,respons,status,headers)=>{
+      if (respons){
+        const res:Photo=JSON.parse(respons);
+        const photo={
+          id:res.id,
+          url:res.url,
+          dateAdded:res.dateAdded,
+          description:res.description,
+          isMain:res.isMain
+        };
+        this.photos.push(photo);
+      }
+    }
   }
 
 }

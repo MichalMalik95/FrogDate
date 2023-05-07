@@ -4,6 +4,10 @@ img.img-thumbnail{
   margin-bottom:2px
 }
 .btn {
-  width:50px;
+  min-width:50px;
   height: 50px;
+}
+.nv-file-over{
+  border: 2px;
+  border-color: blue;
 }
