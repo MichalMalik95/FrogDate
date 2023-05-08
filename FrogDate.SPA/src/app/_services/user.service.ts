@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EnvironmentInjector, Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable, ɵɵqueryRefresh } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../models/user';
@@ -21,5 +21,9 @@ getUser(id:number): Observable<User>{
 }
 updateUser(id:number,user:User): Observable<any>{
    return this.http.put(this.baseUrl+'/users/'+id,user);
+}
+
+setMainPhoto(userId:number,id:number){
+  return this.http.post(this.baseUrl+ '/users/'+userId+"/photos/"+id+"/setMain", {});
 }
 }

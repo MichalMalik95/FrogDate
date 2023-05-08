@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
 import { Photo } from 'src/app/models/photo';
 import { environment } from 'src/environments/environment';
 
@@ -11,15 +13,18 @@ import { environment } from 'src/environments/environment';
 })
 export class PhotosComponent implements OnInit {
 
-  @Input()
+  @Input() photos:Photo[];
+  @Output() getUserPhotoChange=new EventEmitter<string>();
 
-  photos:Photo[];
   uploader:FileUploader;
   hasBaseDropZoneOver:boolean =false;
   baseUrl=environment.apiUrl;
   response:string;
+  currentMain: Photo;
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,
+              private userService:UserService,
+              private alertify:AlertifyService) { }
 
   ngOnInit() {
     this.initializeUploader();
@@ -55,6 +60,19 @@ export class PhotosComponent implements OnInit {
         this.photos.push(photo);
       }
     };
+  }
+  setMainPhoto(photo:Photo){
+    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(()=>
+    {
+      console.log('Photo corectly set as Main');
+      this.currentMain=this.photos.filter(p=>p.isMain===true)[0];
+      this.currentMain.isMain=false;
+      photo.isMain=true;
+      this.getUserPhotoChange.emit(photo.url);
+    },
+    error=>{
+      this.alertify.error(error);
+    });
   }
 
 }
