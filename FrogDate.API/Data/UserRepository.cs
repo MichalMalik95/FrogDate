@@ -34,5 +34,10 @@ namespace FrogDate.API.Data
             return photo;
         }
 
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+        {
+            return await _context.Photos.Where(u=>u.Id == userId).FirstOrDefaultAsync(p=>p.IsMain);
+            
+        }
     }
 }

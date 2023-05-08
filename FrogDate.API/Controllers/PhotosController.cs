@@ -38,7 +38,8 @@ public class PhotosController :ControllerBase
              _cloudinary=new Cloudinary(account);
         }
 
-        [HttpPost]public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
+        [HttpPost]
+        public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -66,7 +67,7 @@ public class PhotosController :ControllerBase
 
             var photo=_mapper.Map<Photo>(photoForCreationDto);
 
-            if(userFromRepo.Photos.Any(p=>p.IsMain))
+            if(!userFromRepo.Photos.Any(p=>p.IsMain))
                 photo.IsMain=true;
 
             userFromRepo.Photos.Add(photo);
@@ -86,6 +87,35 @@ public class PhotosController :ControllerBase
             var photoForReturn=_mapper.Map<PhotoForReturnDto>(photoFromRepo);
 
             return Ok(photoForReturn);
+        }
+
+        [HttpPost("{id}/setMain")]
+        public async Task<IActionResult> SetMainPhoto(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user =await _repository.GetUser(userId);;
+
+            if(!user.Photos.Any(p=> p.Id == id))
+            return Unauthorized();
+
+            var photoFromRepo=await _repository.GetPhoto(id);
+
+            if(photoFromRepo.IsMain)
+                return BadRequest("This is main photo already");
+
+            var currentMainPhoto=await _repository.GetMainPhotoForUser(userId);
+            currentMainPhoto.IsMain=false;
+            photoFromRepo.IsMain=true;
+
+            if(await _repository.SaveAll())
+            return NoContent();
+
+            return BadRequest("Can not set photo as main");
+
+
+
         }
 
 }

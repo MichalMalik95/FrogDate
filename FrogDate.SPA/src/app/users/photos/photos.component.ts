@@ -44,17 +44,17 @@ export class PhotosComponent implements OnInit {
     this.uploader.onAfterAddingFile= (file)=>{file.withCredentials=false};
     this.uploader.onSuccessItem=(item,respons,status,headers)=>{
       if (respons){
-        const res:Photo=JSON.parse(respons);
+        const res:Photo= JSON.parse(respons);
         const photo={
-          id:res.id,
-          url:res.url,
-          dateAdded:res.dateAdded,
-          description:res.description,
-          isMain:res.isMain
+          id: res.id,
+          url: res.url,
+          dateAdded: res.dateAdded,
+          description: res.description,
+          isMain: res.isMain
         };
         this.photos.push(photo);
       }
-    }
+    };
   }
 
 }
