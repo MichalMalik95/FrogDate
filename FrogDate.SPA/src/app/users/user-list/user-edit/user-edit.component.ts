@@ -13,6 +13,8 @@ import { User } from 'src/app/models/user';
 })
 export class UserEditComponent implements OnInit {
   user:User|any;
+  photoUrl:string;
+
   @ViewChild('editForm') editForm:NgForm;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event:any){
@@ -31,6 +33,7 @@ export class UserEditComponent implements OnInit {
     this.route.data.subscribe(data=>{
       this.user=data['user'];
     });
+    this.authService.currentPhotoUr.subscribe(photoUrl=>this.photoUrl=photoUrl);
   }
   updateUser(){
     this.userService.updateUser(this.authService.decodedToken.nameid,this.user)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FrogDate.API.Data;
 using FrogDate.API.Dtos;
 using FrogDate.API.Models;
@@ -19,11 +20,13 @@ namespace FrogDate.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repository;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repository,IConfiguration config)
+        public AuthController(IAuthRepository repository,IConfiguration config, IMapper mapper)
         {
             _config = config;
             _repository = repository;
+            _mapper = mapper;
 
         }
         [HttpPost("register")]
@@ -59,8 +62,12 @@ namespace FrogDate.API.Controllers
             };
             var tokenHandler =new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
 
-            return Ok(new {token=tokenHandler.WriteToken(token)});
+            return Ok(new {
+                token=tokenHandler.WriteToken(token),
+                user
+            });
 
         }
     }
