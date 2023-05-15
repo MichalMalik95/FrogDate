@@ -9,7 +9,7 @@
       <button type="button" class="btn btn-sm mr-1"
       (click)="setMainPhoto(photo)" [disabled]="photo.isMain"
       [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary' ">Main</button>
-      <button type="button" class="btn btn-sm btn-danger">
+      <button type="button" class="btn btn-sm btn-danger" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

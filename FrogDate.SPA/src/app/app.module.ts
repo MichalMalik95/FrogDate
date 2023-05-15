@@ -6,7 +6,7 @@ import { RegisterComponent } from './register/register/register.component';
 import { HomeComponent } from './home/home/home.component';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
@@ -51,6 +51,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
@@ -59,6 +60,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     GalleryModule.withConfig({  }),
     ReactiveFormsModule,
     FileUploadModule
+
 
   ],
   providers: [

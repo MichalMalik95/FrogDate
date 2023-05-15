@@ -20,5 +20,12 @@ warning(message:any){
 message(message:any){
   alertify.message(message);
 }
+confirm(message:any, okCallback:()=> any){
+  alertify.confirm(message, (e:any)=>{
+    if (e){
+      okCallback();
+    } else {}
+  });
+}
 
 }
