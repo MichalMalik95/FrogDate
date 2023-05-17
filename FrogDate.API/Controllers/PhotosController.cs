@@ -41,7 +41,7 @@ public class PhotosController :ControllerBase
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId,[FromForm]PhotoForCreationDto photoForCreationDto)
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int result) && result != userId)
                 return Unauthorized();
 
             var userFromRepo= await _repository.GetUser(userId);
@@ -62,19 +62,23 @@ public class PhotosController :ControllerBase
                 }
             }
 
-            photoForCreationDto.Url=uploadResult.Uri.ToString();
-            photoForCreationDto.PublicId=uploadResult.PublicId;
+            photoForCreationDto.Url = uploadResult.Uri.ToString();
+            photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo=_mapper.Map<Photo>(photoForCreationDto);
 
-            if(!userFromRepo.Photos.Any(p=>p.IsMain))
+            if(!userFromRepo.Photos.Any(p => p.IsMain))
                 photo.IsMain=true;
 
             userFromRepo.Photos.Add(photo);
             if(await _repository.SaveAll())
             {
                 var photoToReturn=_mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto",new {id=photo.Id},value:photoToReturn);
+                return Ok(photoToReturn);
+                //return CreatedAtRoute(
+                //    routeName: "GetPhoto",
+                //    routeValues: new { id = photo.Id },
+                //    value: photoToReturn); ;
             }
 
 
