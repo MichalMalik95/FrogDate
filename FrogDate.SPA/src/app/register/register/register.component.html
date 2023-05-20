@@ -2,6 +2,16 @@
   <h2 class="text-center text-primary">Sign in!</h2>
   <hr>
   <div class="form-group">
+    <label class="control-label" style="margin-right: 10px">Gender:</label>
+    <label class="radio-inline">
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Men
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Women
+    </label>
+  </div>
+
+  <div class="form-group">
     <input type="text" class="form-control" placeholder="Username" formControlName="username"
       [ngClass]="{'is-invalid': registerForm.get('username')?.errors && registerForm.get('username')?.touched}">
     <div class="invalid-feedback">Enter username</div>
@@ -34,10 +44,37 @@
       Password are not the same </div>
   </div>
 
+  <div class="form-group">
+    <input type="date" class="form-control" placeholder="Day of Birth" formControlName="dayOfBirth"
+      [ngClass]="{'is-invalid': registerForm.get('dayOfBirth')?.errors && registerForm.get('dayOfBirth')?.touched}">
+    <div class="invalid-feedback"
+    *ngIf="registerForm.get('dayOfBirth')?.touched && registerForm.get('dayOfBirth')?.hasError('required')">Enter your born day</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Zodiac Sign" formControlName="zodiacSign"
+      [ngClass]="{'is-invalid': registerForm.get('zodiacSign')?.errors && registerForm.get('zodiacSign')?.touched}">
+    <div class="invalid-feedback"
+    *ngIf="registerForm.get('zodiacSign')?.touched && registerForm.get('zodiacSign')?.hasError('required')">Enter your zodiac sign</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="City" formControlName="city"
+      [ngClass]="{'is-invalid': registerForm.get('city')?.errors && registerForm.get('city')?.touched}">
+    <div class="invalid-feedback"
+    *ngIf="registerForm.get('city')?.touched && registerForm.get('city')?.hasError('required')">Enter your city</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Country" formControlName="country"
+      [ngClass]="{'is-invalid': registerForm.get('country')?.errors && registerForm.get('country')?.touched}">
+    <div class="invalid-feedback"
+    *ngIf="registerForm.get('country')?.touched && registerForm.get('country')?.hasError('required')">Enter your country</div>
+  </div>
 
 
   <div class="form-group text-center">
-    <button class="btn btn-success" type="submit">Register</button>
+    <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">Register</button>
     <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
   </div>
 </form>

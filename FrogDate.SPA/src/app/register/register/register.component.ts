@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -16,17 +16,27 @@ export class RegisterComponent implements OnInit {
   model:any={};
   registerForm:FormGroup;
 
-  constructor(private authService:AuthService,private alertify:AlertifyService ) { }
+  constructor(private authService:AuthService,private alertify:AlertifyService, private formBuilder:FormBuilder ) { }
 
   ngOnInit() {
-    this.registerForm=new FormGroup({
-      username:new FormControl('',Validators.required),
-      password:new FormControl('', [Validators.required,Validators.minLength(4),Validators.maxLength(10)]),
-      confirmPassword:new FormControl('', [Validators.required,Validators.minLength(4),Validators.maxLength(10)]),
-    },this.passswordMatchValidator);
+    this.createRegisterForm();
   }
+
+  createRegisterForm(){
+    this.registerForm=this.formBuilder.group({
+      username:['',Validators.required],
+      password:['', [Validators.required,Validators.minLength(4),Validators.maxLength(10)]],
+      confirmPassword:['', [Validators.required,Validators.minLength(4),Validators.maxLength(10)]],
+      gender:['female'],
+      dayOfBirth:['',Validators.required],
+      zodiacSign:['',Validators.required],
+      city:['',Validators.required],
+      country:['',Validators.required],
+    }, {validator: this.passswordMatchValidator});
+  }
+
   passswordMatchValidator(fg:AbstractControl){
-    return fg.get('password')?.value === fg.get('confirmPassword')?.value ? {missmatch:false} : {missmatch:true};
+    return fg.get('password')?.value === fg.get('confirmPassword')?.value ? null : {missmatch: true};
   }
 
   register(){
