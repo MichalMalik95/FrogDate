@@ -40,8 +40,8 @@ login(model:any): Observable<any> {
   }
   } ));
 }
-register(model:any){
-  return this.http.post(this.baseUrl+'/register',model)
+register(user:User){
+  return this.http.post(this.baseUrl+'/register',user)
 }
 loggedIn(){
   const token=localStorage.getItem('token');

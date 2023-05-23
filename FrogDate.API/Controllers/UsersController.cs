@@ -38,7 +38,7 @@ namespace FrogDate.API.Controllers
             return BadRequest();
         
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name ="GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             try

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -10,6 +11,7 @@ using FrogDate.API.Data;
 using FrogDate.API.Dtos;
 using FrogDate.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 
 namespace FrogDate.API.Controllers
@@ -32,11 +34,24 @@ namespace FrogDate.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
-            if (await _repository.UserExist(userForRegisterDto.Username)) return BadRequest("Użytkownik o takiej nazwie już istnieje");
-            var userToCreate = new User { Username = userForRegisterDto.Username };
-            var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
-            return StatusCode(201);
+            try
+            {
+                userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+
+                if (await _repository.UserExist(userForRegisterDto.Username))
+                {
+                    return BadRequest("Użytkownik o takiej nazwie już istnieje");
+                }
+
+                var userToCreate = _mapper.Map<User>(userForRegisterDto);
+                var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
+                var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+
+                return CreatedAtRoute("GetUser", new { controller = "Users", Id = createdUser.Id }, userToReturn);
+            } catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
