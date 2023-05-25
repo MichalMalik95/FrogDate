@@ -72,61 +72,61 @@
           <div>
             <strong>Music</strong>
             <p>{{user.music}}</p>
-          </div>   
+          </div>
         </tab>
         <tab heading="Visual information">
           <div>
             <strong>Growth</strong>
             <p>{{user.growth}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Eye colour</strong>
             <p>{{user.eyeColour}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Skin colour</strong>
             <p>{{user.skinColour}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Martial status</strong>
             <p>{{user.martialStatus}}</p>
-          </div> 
+          </div>
         </tab>
 
         <tab heading="My steps of life">
           <div>
             <strong>Education</strong>
             <p>{{user.education}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Profession</strong>
             <p>{{user.profession}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Children</strong>
             <p>{{user.children}}</p>
-          </div> 
+          </div>
           <div>
             <strong>Languages</strong>
             <p>{{user.languages}}</p>
-          </div> 
+          </div>
         </tab>
         <tab heading="Activity on site">
           <div>
             <strong>Last activity</strong>
-            <p>{{user.lastActive}}</p>
-          </div> 
+            <p>{{user.lastActive | timeAgo}}</p>
+          </div>
           <div>
             <strong>Created</strong>
-            <p>{{user.created}}</p>
-          </div>  
+            <p>{{user.created | date:'longDate'}}</p>
+          </div>
         </tab>
         <tab heading="Picture gallery">
           <div>
             <gallery [items]="images"></gallery>
-          </div> 
+          </div>
         </tab>
       </tabset>
     </div>
   </div>
- 
+

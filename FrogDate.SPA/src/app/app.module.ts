@@ -30,6 +30,7 @@ import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { PhotosComponent } from './users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { FileUploadModule } from 'ng2-file-upload';
       UserCardComponent,
       UserDetailComponent,
       UserEditComponent,
-      PhotosComponent
+      PhotosComponent,
+      TimeAgoPipe
 
    ],
   imports: [

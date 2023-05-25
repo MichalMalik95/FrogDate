@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FrogDate.API.Data;
 using FrogDate.API.Dtos;
+using FrogDate.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrogDate.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]

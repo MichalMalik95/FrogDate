@@ -36,6 +36,7 @@ internal class Program
         builder.Services.AddScoped<IGenericRepository, GenericRepository>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddTransient<Seed>();
+        builder.Services.AddScoped<LogUserActivity>();
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
