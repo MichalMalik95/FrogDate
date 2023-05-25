@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-2" *ngFor="let photo of photos">
     <img
-      src="{{ photo.url }}"
+      src="{{ photo.url || '../../../../../assets/User_Icon.PNG' }}"
       alt="photo.description"
       class="img-thumbnail p-1"
     />
