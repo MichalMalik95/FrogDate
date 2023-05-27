@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FrogDate.API.Models;
+using FrogDate.API.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrogDate.API.Data
@@ -22,10 +23,11 @@ namespace FrogDate.API.Data
             return user;
         } 
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var users=await _context.Users.Include(p=>p.Photos).ToListAsync();
-            return users;
+            var users= _context.Users.Include(p=>p.Photos);
+
+            return await PageList<User>.CreateListAsync(users, userParams.PageNumber,userParams.pageSize);
         }
 
         public async Task<Photo> GetPhoto(int id)

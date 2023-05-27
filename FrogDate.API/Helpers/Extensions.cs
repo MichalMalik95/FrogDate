@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace FrogDate.API.Helpers
 {
@@ -29,7 +30,10 @@ namespace FrogDate.API.Helpers
          {
             var paginationHeader = new PaginationHeader(currentPage,itemsPerPage,totalItems,totalPages);
 
-            response.Headers.Add("Pagination",JsonConvert.SerializeObject(paginationHeader));
+            var camelCaseFormater = new JsonSerializerSettings();
+            camelCaseFormater.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            response.Headers.Add("Pagination",JsonConvert.SerializeObject(paginationHeader, camelCaseFormater));
             response.Headers.Add("Acces-Control-Expose-Headers","Pagination");
          }
     }

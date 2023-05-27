@@ -22,7 +22,7 @@ constructor(private authService:AuthService){}
    }
    if(user){
     this.authService.currentUser=user;
-    this.authService.changeUserPhoto(user.photoUrl);
+    this.authService.changeUserPhoto(user.photoUrl ?? '../assets/User_Icon.PNG');
    }
   }
 

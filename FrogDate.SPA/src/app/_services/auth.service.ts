@@ -36,7 +36,7 @@ login(model:any): Observable<any> {
       this.decodedToken=this.jwthelper.decodeToken(user.token);
       console.log(this.decodedToken);
       this.currentUser=user.user;
-      this.changeUserPhoto(this.currentUser.photoUrl);
+      this.changeUserPhoto(this.currentUser.photoUrl ?? '../../assets/User_Icon.PNG');
   }
   } ));
 }
