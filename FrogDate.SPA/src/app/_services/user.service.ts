@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { EnvironmentInjector, Injectable, ɵɵqueryRefresh } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../models/user';
 import { PaginationResult } from '../models/pagination';
@@ -10,6 +10,7 @@ import { PaginationResult } from '../models/pagination';
   providedIn: 'root'
 })
 export class UserService {
+
   baseUrl= environment.apiUrl;
 
 constructor(private http:HttpClient,  ) { }
@@ -17,7 +18,7 @@ constructor(private http:HttpClient,  ) { }
 getUsers(page:number, itemsPerPage: number)
 :Observable<PaginationResult<User[]>>{
 
-  var paginationResult: PaginationResult<User[]> = new PaginationResult<User[]>();
+  const paginationResult: PaginationResult<User[]> = new PaginationResult<User[]>();
 
   let params = new HttpParams();
 
@@ -28,12 +29,14 @@ getUsers(page:number, itemsPerPage: number)
 
 
   return this.http.get<User[]>(this.baseUrl + '/users', {observe: 'response', params}).pipe(
-    map(response =>{
+
+    map((response:HttpResponse<any>) =>{
+      console.log(response);
 
       paginationResult.result = response?.body ?? [];
 
       if(response.headers.get('Pagination') != null){
-        paginationResult.pagination =JSON.parse(response.headers.get('pagination') || '{}')
+        paginationResult.pagination =JSON.parse(response.headers.get('Pagination') || "");
       }
 
       return paginationResult;
