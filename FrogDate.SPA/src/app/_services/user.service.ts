@@ -15,7 +15,7 @@ export class UserService {
 
 constructor(private http:HttpClient,  ) { }
 
-getUsers(page:number, itemsPerPage: number)
+getUsers(page:number, itemsPerPage: number, userParams: any | null )
 :Observable<PaginationResult<User[]>>{
 
   const paginationResult: PaginationResult<User[]> = new PaginationResult<User[]>();
@@ -25,6 +25,13 @@ getUsers(page:number, itemsPerPage: number)
   if(page != null && itemsPerPage != null){
     params = params.append('pageNumber',page);
     params = params.append('pageSize',itemsPerPage)
+  }
+
+  if(userParams != null){
+    params = params.append('minAge', userParams.minAge);
+    params = params.append('maxAge', userParams.maxAge);
+    params = params.append('zodiacSign', userParams.zodiacSign);
+    params = params.append('gender', userParams.gender);
   }
 
 
