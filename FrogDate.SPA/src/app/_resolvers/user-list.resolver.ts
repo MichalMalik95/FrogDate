@@ -15,7 +15,8 @@ import { PaginationResult } from '../models/pagination';
 export class UserListResolver implements Resolve<PaginationResult<User[]>> {
 
   pageNumber=1;
-  pageSize=6;
+  pageSize=16;
+  params={minAge:18, maxAge:100, gender:"all", zodiacSign:"all"};
 
   constructor(
     private userService: UserService,
@@ -24,7 +25,7 @@ export class UserListResolver implements Resolve<PaginationResult<User[]>> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<PaginationResult<User[]>> {
-    return this.userService.getUsers(this.pageNumber,this.pageSize).pipe(
+    return this.userService.getUsers(this.pageNumber,this.pageSize,this.params).pipe(
       catchError(error=>{
         this.alertify.error('Download data problem');
         this.router.navigate(['']);

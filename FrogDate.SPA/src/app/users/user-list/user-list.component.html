@@ -11,13 +11,61 @@
     <a href="https://en.wikipedia.org/wiki/French_cuisine">
       <img src="../../../assets/VerticalBanner.PNG" alt="ADDS">
     </a>
-
   </div>
+
   <div class="p-2 bd-highlight">
+    <div class="col-lg-10 col-md-8 col-sm-6">
+      <div>
+        <h2>Proposition for you-proposition finded: {{pagination.totalItems}}</h2>
+      </div>
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
+        <div class="form-group">
+          <label for="minAge">Minimum age</label>
+          <input type="number" class="form-control ml-1" style="width: 70px" id="minAge"
+                [(ngModel)]="userParams.minAge" name="minAge">
+        </div>
+
+        <div class="form-group px-2">
+          <label for="maxAge">Maximal age</label>
+          <input type="number" class="form-control ml-1" style="width: 75px" id="maxAge"
+          [(ngModel)]="userParams.maxAge" name="maxAge">
+        </div>
+
+        <div class="form-group px-2">
+          <label for="gender">Gender</label>
+          <select class="form-control ml-1" style="width: 130px" id="gender"
+          [(ngModel)]="userParams.gender" name="gender">
+            <option *ngFor="let gender of genderList" [value]="gender.value">
+              {{gender.display}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group px-2">
+          <label for="zodiacSign">Zodiac Sign</label>
+          <select class="form-control ml-1" style="width: 130px" id="zodiacSign"
+          [(ngModel)]="userParams.zodiacSign" name="zodiacSign">
+            <option *ngFor="let zodiacSign of zodiacSignList" [value]="zodiacSign.value">
+              {{zodiacSign.display}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Submit</button>
+        <button type="button" class="btn btn-info" style="margin-left: 10px;" (click)="resetFilters()">Reset</button>
+      </form>
+
+
+    </div>
     <div class="d-flex flex-wrap">
       <div *ngFor="let user of users" class="p-2 bd-highlight">
         <app-user-card [user]="user"></app-user-card>
       </div>
     </div>
+    <pagination [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"></pagination>
+
   </div>
 </div>

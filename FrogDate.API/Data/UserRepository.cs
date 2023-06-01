@@ -25,7 +25,24 @@ namespace FrogDate.API.Data
 
         public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var users= _context.Users.Include(p=>p.Photos);
+            var users= _context.Users.Include(p=>p.Photos).AsQueryable();
+            
+            users = users.Where(u => u.Id != userParams.UserId);
+
+            if (userParams.Gender != "all")
+                users = users.Where(u => u.Gender == userParams.Gender);
+
+            if(userParams.MinAge != 18 || userParams.MaxAge != 100)
+            {
+                var minDate = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+                var maxDate = DateTime.Today.AddYears(-userParams.MinAge);
+
+                users = users.Where(u => u.DayOfBirth >= minDate && u.DayOfBirth <= maxDate);
+            }
+
+            if(userParams.ZodiacSign.ToLower() != "all")
+                users = users.Where( u => u.ZodiacSign.ToLower() == userParams.ZodiacSign.ToLower());
+
 
             return await PageList<User>.CreateListAsync(users, userParams.PageNumber,userParams.pageSize);
         }

@@ -73,7 +73,7 @@ internal class Program
 
         }
 
-        app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+        app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().WithExposedHeaders("Pagination").AllowAnyMethod());
         app.UseHttpsRedirection();
 
         app.UseAuthentication();

@@ -33,8 +33,10 @@ namespace FrogDate.API.Helpers
             var camelCaseFormater = new JsonSerializerSettings();
             camelCaseFormater.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+
             response.Headers.Add("Pagination",JsonConvert.SerializeObject(paginationHeader, camelCaseFormater));
             response.Headers.Add("Acces-Control-Expose-Headers","Pagination");
+
          }
     }
 }

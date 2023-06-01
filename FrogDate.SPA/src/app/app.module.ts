@@ -31,6 +31,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { PhotosComponent } from './users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
+import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { TimeAgoPipe } from './_pipes/time-ago-pipe';
     GalleryModule,
     GalleryModule.withConfig({  }),
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule.forRoot(),
 
 
   ],
@@ -74,7 +76,8 @@ import { TimeAgoPipe } from './_pipes/time-ago-pipe';
     UserListResolver,
     UserEditResolver,
     PreventUnsavedChanges,
-    ErrorInterceptorProvider],
+    ErrorInterceptorProvider,
+    PaginationConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

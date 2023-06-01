@@ -29,7 +29,19 @@ namespace FrogDate.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
-            try{
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value); 
+            var userFromRepo = await _repo.GetUser(currentUserId);
+
+            userParams.UserId = currentUserId;
+
+            if(string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "men" ? "women" : "men";
+            }
+
+
+            try
+            {
             var users= await _repo.GetUsers(userParams);
             var usersToReturn= _mapper.Map<IEnumerable<UserForListDto>>(users);
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
@@ -62,6 +74,7 @@ namespace FrogDate.API.Controllers
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
             var x = User.FindFirst("tympyuju");
+
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
