@@ -11,5 +11,22 @@ namespace FrogDate.API.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Likes> Likes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Likes>().HasKey(k => new {k.UserLikesId, k.UserIsLikedId });
+
+            builder.Entity<Likes>().HasOne(u => u.UserIsLiked)
+                                   .WithMany(u => u.UserLikes)
+                                   .HasForeignKey(u => u.UserIsLikedId)
+                                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Likes>().HasOne(u => u.UserLikes)
+                                   .WithMany(u => u.UserIsLiked)
+                                   .HasForeignKey(u => u.UserLikesId)
+                                   .OnDelete(DeleteBehavior.Restrict);
+        }
+        
     }
 }

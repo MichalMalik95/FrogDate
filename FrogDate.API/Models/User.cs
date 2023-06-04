@@ -47,5 +47,7 @@ namespace FrogDate.API.Models
      public string? FriendsDescribeMe { get; set; }
      //pics
      public ICollection<Photo>? Photos { get; set; }
+     public ICollection<Likes>? UserLikes { get; set; }
+     public ICollection<Likes>? UserIsLiked { get; set; }
     }
 }
