@@ -32,6 +32,7 @@ getUsers(page:number, itemsPerPage: number, userParams: any | null )
     params = params.append('maxAge', userParams.maxAge);
     params = params.append('zodiacSign', userParams.zodiacSign);
     params = params.append('gender', userParams.gender);
+    params = params.append('orderBy', userParams.orderBy);
   }
 
 

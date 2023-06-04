@@ -32,6 +32,7 @@ import { PhotosComponent } from './users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 
 @NgModule({
@@ -64,8 +65,7 @@ import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
     ReactiveFormsModule,
     FileUploadModule,
     PaginationModule.forRoot(),
-
-
+    ButtonsModule,
   ],
   providers: [
     AuthService,

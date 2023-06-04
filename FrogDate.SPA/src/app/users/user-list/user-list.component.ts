@@ -16,7 +16,8 @@ export class UserListComponent implements OnInit {
   users:User[] = [];
   user: User = JSON.parse(localStorage.getItem('user') || "{}");
   genderList = [{value:"men", display:"men"},
-                {value:"women", display:"women"}];
+                {value:"women", display:"women"},
+                {value:"all", display:"all"}];
   zodiacSignList = [{value:"Virgo", display:"Virgo"},
                     {value:"Pices", display:"Pices"},
                     {value:"Capricon", display:"Capricon"},
@@ -37,6 +38,7 @@ export class UserListComponent implements OnInit {
       this.userParams.zodiacSign = this.user.zodiacSign = 'all';
       this.userParams.minAge = 18;
       this.userParams.maxAge = 100;
+      this.userParams.orderBy = "lastActive";
 
     });
   }
@@ -50,6 +52,7 @@ export class UserListComponent implements OnInit {
     this.userParams.zodiacSign = this.user.zodiacSign = 'all';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 100;
+    this.userParams.orderBy = "lastActive";
     this.loadUsers();
 
   }
