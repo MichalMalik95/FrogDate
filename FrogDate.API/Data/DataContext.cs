@@ -12,6 +12,7 @@ namespace FrogDate.API.Data
 
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Likes> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,6 +26,12 @@ namespace FrogDate.API.Data
             builder.Entity<Likes>().HasOne(u => u.UserLikes)
                                    .WithMany(u => u.UserIsLiked)
                                    .HasForeignKey(u => u.UserLikesId)
+                                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Message>().HasOne(u => u.Sender)
+                                   .WithMany(m => m.MessagesSent)
+                                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Message>().HasOne(u => u.Recipient)
+                                   .WithMany(m => m.MessagesRecived)
                                    .OnDelete(DeleteBehavior.Restrict);
         }
         

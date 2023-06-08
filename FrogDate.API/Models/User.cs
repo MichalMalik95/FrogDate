@@ -49,5 +49,7 @@ namespace FrogDate.API.Models
      public ICollection<Photo>? Photos { get; set; }
      public ICollection<Likes>? UserLikes { get; set; }
      public ICollection<Likes>? UserIsLiked { get; set; }
+     public ICollection<Message>? MessagesRecived { get; set; }
+     public ICollection<Message>? MessagesSent { get; set; }
     }
 }
