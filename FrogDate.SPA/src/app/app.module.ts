@@ -33,6 +33,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { LikesResolver } from './_resolvers/like.resolver';
 
 
 @NgModule({
@@ -75,9 +76,11 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     UserDetailResolver,
     UserListResolver,
     UserEditResolver,
+    LikesResolver,
     PreventUnsavedChanges,
     ErrorInterceptorProvider,
     PaginationConfig],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

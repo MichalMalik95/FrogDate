@@ -15,7 +15,7 @@ export class UserService {
 
 constructor(private http:HttpClient,  ) { }
 
-getUsers(page:number, itemsPerPage: number, userParams: any | null )
+getUsers(page:number, itemsPerPage: number, userParams: any | null, likeParams: any | null )
 :Observable<PaginationResult<User[]>>{
 
   const paginationResult: PaginationResult<User[]> = new PaginationResult<User[]>();
@@ -33,6 +33,15 @@ getUsers(page:number, itemsPerPage: number, userParams: any | null )
     params = params.append('zodiacSign', userParams.zodiacSign);
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
+  }
+
+  if(likeParams === "UserLikes"){
+    params = params.append('UserLikes', 'true');
+
+  }
+  if(likeParams === "UserIsLiked"){
+    params = params.append('UserIsLiked', 'true');
+
   }
 
 
@@ -63,6 +72,10 @@ setMainPhoto(userId:number,id:number){
 }
 
 deletePhoto(userId:number,id:number){
-  return this.http.delete(this.baseUrl+'/users/'+userId+'/photos/'+id);
+  return this.http.delete(this.baseUrl+'/users/'+ userId +'/photos/'+id);
+}
+
+sendLike(id: number, recipientId:number){
+  return this.http.post(this.baseUrl + '/users/' + id + '/likes/' + recipientId, {});
 }
 }

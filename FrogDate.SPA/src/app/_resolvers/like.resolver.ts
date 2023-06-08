@@ -12,10 +12,11 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { PaginationResult } from '../models/pagination';
 
 @Injectable()
-export class UserListResolver implements Resolve<PaginationResult<User[]>> {
+export class LikesResolver implements Resolve<PaginationResult<User[]>> {
 
   pageNumber=1;
   pageSize=16;
+  likesParam="UserLikes";
   params={minAge:18, maxAge:100, gender:"all", zodiacSign:"all"};
 
   constructor(
@@ -25,7 +26,7 @@ export class UserListResolver implements Resolve<PaginationResult<User[]>> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<PaginationResult<User[]>> {
-    return this.userService.getUsers(this.pageNumber, this.pageSize, this.params, null).pipe(
+    return this.userService.getUsers(this.pageNumber,this.pageSize, null, this.likesParam).pipe(
       catchError(error=>{
         this.alertify.error('Download data problem');
         this.router.navigate(['']);

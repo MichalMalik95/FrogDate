@@ -1,3 +1,42 @@
-<p>
-  likes works!
-</p>
+<div class="d-flex p-2 bd-highlight">
+  <div class="p-2 bd-highlight">
+    <a href="https://plnts.com/en">
+      <img src="../../../assets/HorizontalBanner.PNG" alt="ADDS">
+    </a>
+  </div>
+</div>
+
+<div class="d-flex p-2 bd-highlight">
+  <div class="p-2 flex-shrink-1 bd-highlight">
+    <a href="https://en.wikipedia.org/wiki/French_cuisine">
+      <img src="../../../assets/VerticalBanner.PNG" alt="ADDS">
+    </a>
+  </div>
+
+  <div class="p-2 bd-highlight">
+    <div class="col-lg-10 col-md-8 col-sm-6">
+      <div>
+        <h2>{{likesParam === 'UserLikes' ? 'Users liked me' : 'Users who I liked'}}:
+          {{pagination.totalItems}}
+        </h2>
+      </div>
+        <form>
+          <button type="button" class="btn btn-info" style="margin-left: 10px;"
+          [(ngModel)]="likesParam" btnRadio="UserLikes" (click)="loadUsers()" [ngModelOptions]="{standalone: true}">Users likes</button>
+          <button type="button" class="btn btn-info" style="margin-left: 10px;"
+          [(ngModel)]="likesParam" btnRadio="UserIsLiked" (click)="loadUsers()" [ngModelOptions]="{standalone: true}">Users liked me</button>
+        </form>
+    </div>
+    <div class="d-flex flex-wrap">
+      <div *ngFor="let user of users" class="p-2 bd-highlight">
+        <app-user-card [user]="user"></app-user-card>
+      </div>
+    </div>
+    <pagination [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"></pagination>
+
+  </div>
+</div>

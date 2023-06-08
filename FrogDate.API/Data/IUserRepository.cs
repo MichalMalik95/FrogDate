@@ -15,6 +15,7 @@ namespace FrogDate.API.Data
         Task<Photo> GetPhoto(int id);
 
         Task<Photo>GetMainPhotoForUser(int userId);
+        Task<Likes>GetLikes(int userId, int recipientId);
         
     }
 }

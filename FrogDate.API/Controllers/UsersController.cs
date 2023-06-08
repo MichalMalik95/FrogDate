@@ -7,6 +7,7 @@ using AutoMapper;
 using FrogDate.API.Data;
 using FrogDate.API.Dtos;
 using FrogDate.API.Helpers;
+using FrogDate.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -90,5 +91,36 @@ namespace FrogDate.API.Controllers
             throw new Exception($"Updating user of id:{id} is failed");
 
         }
+
+        [HttpPost("{id}/likes/{recipientId}")]
+
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var like = await _repo.GetLikes(id,recipientId);
+
+            if(like != null)
+                return BadRequest("You already like this user");
+
+            if(await _repo.GetUser(recipientId) == null)
+                return NotFound();
+
+            like = new Likes 
+            {
+                UserLikesId = id,
+                UserIsLikedId = recipientId
+            };
+
+            _repo.Add<Likes>(like);
+
+            if(await _repo.SaveAll())
+                return Ok();
+            
+            return BadRequest("You can not like this user");
+
+        }
+       
     }
 }
