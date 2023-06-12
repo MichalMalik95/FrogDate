@@ -57,6 +57,20 @@ namespace FrogDate.API.Controllers
             return Ok(messagesToReturn);
 
         }
+        [HttpGet("thread/{recipientId}")]
+
+        public async Task<IActionResult> GetMessageThread(int userId, int recipientId)
+        {
+             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized(); 
+
+            var messageFromRepo = await _repository.GetMessageThread(userId, recipientId);
+            var messageThread = _mapper.Map<IEnumerable<MessageToReturnDto>>(messageFromRepo);
+
+            return Ok(messageThread);
+
+        }
+
 
         [HttpPost]
 
