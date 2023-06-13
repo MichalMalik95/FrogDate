@@ -12,6 +12,7 @@ import { UserEditComponent } from "./users/user-list/user-edit/user-edit.compone
 import { UserEditResolver } from "./_resolvers/user-edit.resolver";
 import { PreventUnsavedChanges } from "./guards/prevent-unsaved-changes.guard";
 import { LikesResolver } from "./_resolvers/like.resolver";
+import { MessagesResolver } from "./_resolvers/messages.resolver";
 
 export const appRoutes:Routes=[
     {path: 'home', component:HomeComponent},
@@ -26,7 +27,8 @@ children: [
                    canDeactivate:[PreventUnsavedChanges]},
     {path: 'liked', component: LikesComponent,
                     resolve: {users:LikesResolver}},
-    {path: 'messages', component:MessagesComponent},
+    {path: 'messages', component:MessagesComponent,
+                      resolve:{messages:MessagesResolver}},
 ]},
     {path: '***', redirectTo:'home',pathMatch:'full'},
 

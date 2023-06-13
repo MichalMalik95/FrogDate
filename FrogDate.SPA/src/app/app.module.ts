@@ -34,6 +34,7 @@ import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { LikesResolver } from './_resolvers/like.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { LikesResolver } from './_resolvers/like.resolver';
     LikesResolver,
     PreventUnsavedChanges,
     ErrorInterceptorProvider,
-    PaginationConfig],
+    PaginationConfig,
+    MessagesResolver],
 
   bootstrap: [AppComponent]
 })

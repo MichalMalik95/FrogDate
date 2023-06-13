@@ -4,6 +4,7 @@ import { Observable, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../models/user';
 import { PaginationResult } from '../models/pagination';
+import { Message } from '../models/message';
 
 
 @Injectable({
@@ -77,5 +78,35 @@ deletePhoto(userId:number,id:number){
 
 sendLike(id: number, recipientId:number){
   return this.http.post(this.baseUrl + '/users/' + id + '/likes/' + recipientId, {});
+}
+
+getMessages(id:number, page?: number, itemsPerPage?: number, messageContainer?: any | null )
+{
+
+  const paginationResult: PaginationResult<Message[]> = new PaginationResult<Message[]>();
+
+  let params = new HttpParams();
+
+  params = params.append('MessageContainer', messageContainer);
+
+  if(page != null && itemsPerPage != null){
+    params = params.append('pageNumber',page);
+    params = params.append('pageSize',itemsPerPage);
+  }
+
+  return this.http.get<Message[]>(this.baseUrl + '/users/' + id + '/messages', {observe: 'response', params}).pipe(
+
+    map((response:HttpResponse<any>) =>{
+      console.log(response);
+
+      paginationResult.result = response?.body ?? [];
+
+      if(response.headers.get('Pagination') != null){
+        paginationResult.pagination =JSON.parse(response.headers.get('Pagination') || "");
+      }
+
+      return paginationResult;
+    })
+    );
 }
 }
