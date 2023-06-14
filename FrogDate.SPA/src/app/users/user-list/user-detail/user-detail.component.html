@@ -126,6 +126,12 @@
             <gallery [items]="images"></gallery>
           </div>
         </tab>
+        <tab heading="Messages">
+          <div>
+            <app-user-messages [recipientId]="user.id"></app-user-messages>
+          </div>
+        </tab>
+
       </tabset>
     </div>
   </div>

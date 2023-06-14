@@ -9,6 +9,6 @@ export interface Message {
   content: string;
   isRead: boolean;
   dateRead: Date;
-  dateSend: Date;
+  dateSent: string;
 
 }

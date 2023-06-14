@@ -35,6 +35,7 @@ import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { LikesResolver } from './_resolvers/like.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { UserMessagesComponent } from './users/user-list/user-messages/user-messages.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
       UserDetailComponent,
       UserEditComponent,
       PhotosComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      UserMessagesComponent
 
    ],
   imports: [

@@ -108,5 +108,9 @@ getMessages(id:number, page?: number, itemsPerPage?: number, messageContainer?: 
       return paginationResult;
     })
     );
-}
+  }
+
+  getMessageThread(id: number, recipientId: number) {
+    return this.http.get<Message[]>(this.baseUrl + '/users/' + id + '/messages/thread/' + recipientId);
+  }
 }
