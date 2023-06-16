@@ -54,10 +54,6 @@
         <button type="button" class="btn btn-info" style="margin-left: 10px;" (click)="resetFilters()">Reset</button>
 
 
-        <!-- <button btnRadio="lastActive" class="btn btn-primary" [(ngModel)]="userParams.orderBy" type="button"
-        (click)="loadUsers()" style="margin-left: 10px;" name="orderBy">Last active</button>
-        <button btnRadio="created" class="btn btn-primary"  [(ngModel)]="userParams.orderBy" type="button"
-        (click)="loadUsers()" name="orderBy">Newest</button> -->
         <div class="btn-group">
           <button class="btn btn-primary" [(ngModel)]="userParams.orderBy"  btnRadio="lastActive" name="lastActive" >Last active</button>
           <button class="btn btn-primary" [(ngModel)]="userParams.orderBy"  btnRadio="created" name="created" >Newest</button>
