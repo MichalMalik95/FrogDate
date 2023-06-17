@@ -5,6 +5,7 @@ import { UserService } from '../_services/user.service';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-messages',
@@ -17,6 +18,7 @@ export class MessagesComponent implements OnInit {
   pagination: Pagination;
   // messageContainer: 'Unread';
   messageContainer: string;
+  flagOutbox = false;
 
 
   constructor(
@@ -34,10 +36,17 @@ export class MessagesComponent implements OnInit {
 
   loadMessages(){
     this.userService.getMessages(this.authService.decodedToken.nameid, this.pagination.currentPage,
-                                  this.pagination.itemsPerPage, this.messages)
+                                  this.pagination.itemsPerPage, this.messageContainer)
                     .subscribe((res:PaginationResult<Message[]>) => {
                       this.messages = res.result;
                       this.pagination = res.pagination;
+
+                      if(res.result[0].messageContainer === 'Outbox') {
+                        this.flagOutbox = true;
+                      }
+                      else {
+                        this.flagOutbox = false;
+                      }
                     }, error => {
                       this.alertify.error(error);
                     });
@@ -46,6 +55,17 @@ export class MessagesComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadMessages();
+  }
+
+  deleteMessage(id: number) {
+    this.alertify.confirm("Are you shure you want to delete this message?", () => {
+      this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.alertify.success("Message succesfully deleted");
+      }, error => {
+        this.alertify.error("Error with deleting message");
+      });
+    });
 
   }
 
